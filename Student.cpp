@@ -1,6 +1,6 @@
 #include "Student.h"
 
-Student::Student(char f[99], char l[99], int i, int g) {
+Student::Student(char f[99], char l[99], int i, float g) {
   strcpy(firstName, f);
   strcpy(lastName, l);
   id = i;
@@ -20,13 +20,14 @@ void Student::getDisplay() {
   cout << ", ";
   cout << id;
   cout << ", ";
-  cout << gpa;
+  cout << fixed << setprecision(2) << gpa;
+  cout << "\n";
 }
 
 int Student::getId() {
   return id;
 }
 
-int Student::getGpa() {
+float Student::getGpa() {
   return gpa;
 }
