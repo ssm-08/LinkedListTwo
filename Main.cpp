@@ -1,6 +1,5 @@
 #include <iostream>
 #include <cstring>
-#include <cstdlib>
 
 #include "Node.h"
 #include "Student.h"
@@ -8,8 +7,8 @@
 using namespace std;
 
 void add(Node*& current, Node* prev, Node*& data);
-void print(Node*& head);
-void del(Node*& head);
+void print(Node* current);
+void del(Node*& current, Node* prev, int id);
 void avg(Node*& head);
 bool quit(Node*& head);
 
@@ -27,29 +26,30 @@ int main() {
   
   while (run == true) {
     cout << "Enter Command: ";
-    cin.getline(input, 99);
+    cin >> input;
+
+    char first[99] = "";
+    char last[99] = "";
+    int id = 0;
+    int gpa = 0;
 
     if (strcmp(input, ADD) == 0) {
-      char first[99] = "";
-      char last[99] = "";
-      char id[99] = "";
-      char gpa[99] = "";
       
       cout << "Enter first name: ";
-      cin.getline(first, 99);
+      cin >> first;
 
       cout << "Enter last name: ";
-      cin.getline(last, 99);
+      cin >> last;
 
       cout << "Enter id: ";
-      cin.getline(id, 99);
+      cin >> id;
 
       cout << "Enter gpa: ";
-      cin.getline(gpa, 99);
+      cin >> gpa;
 
       cout << "vars";
       
-      Student* student = new Student(first, last, atoi(id), atoi(gpa));
+      Student* student = new Student(first, last, id, gpa);
       Node* node = new Node(student);
       Node* prev = NULL;
 
@@ -59,6 +59,13 @@ int main() {
     } else if (strcmp(input, PRINT) == 0) {
       print(head);
     } else if (strcmp(input, DEL) == 0) {
+      cout << "Enter id: ";
+      cin >> id;
+
+      Node* prev = NULL;
+      
+      del(head, prev, id);
+      
     } else if (strcmp(input, AVG) == 0) {
     } else if (strcmp(input, QUIT) == 0) {
     }
@@ -99,12 +106,26 @@ void add(Node*& current, Node* prev, Node*& data) {
   cout << "done";
 }
 
-void print(Node*& head) {
-  if (head != NULL) {
-    head->getStudent()->getDisplay();
-    if (head->getNext() != NULL) {
-      Node* next = head->getNext();
+void print(Node* current) {
+  if (current != NULL) {
+    current->getStudent()->getDisplay();
+    if (current->getNext() != NULL) {
+      Node* next = current->getNext();
       print(next);
+    }
+  }
+}
+
+void del(Node*& current, Node* prev, int id) {
+  cout << "del";
+  if (current != NULL) {
+    if (current->getStudent()->getId() == id) {
+      prev->setNext(current->getNext());
+      delete current;
+      current = NULL;
+    } else if (current->getNext() != NULL) {
+      Node* next = current->getNext();
+      del(next, current, id);
     }
   }
 }
