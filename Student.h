@@ -19,8 +19,8 @@ class Student {
   int getGpa();
   
  private:
-  char* firstName;
-  char* lastName;
+  char firstName[99];
+  char lastName[99];
   int id = 0;
   int gpa = 0;
 };

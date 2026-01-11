@@ -8,11 +8,6 @@ Student::Student(char f[99], char l[99], int i, int g) {
 }
 
 Student::~Student() {
-  delete[] firstName;
-  firstName = NULL;
-
-  delete[] lastName;
-  lastName = NULL;
   id = 0;
   gpa = 0;
 }
