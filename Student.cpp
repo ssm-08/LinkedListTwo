@@ -1,5 +1,6 @@
 #include "Student.h"
 
+// Constructor
 Student::Student(char f[99], char l[99], int i, float g) {
   strcpy(firstName, f);
   strcpy(lastName, l);
@@ -7,11 +8,13 @@ Student::Student(char f[99], char l[99], int i, float g) {
   gpa = g;
 }
 
+// Destructor
 Student::~Student() {
   id = 0;
   gpa = 0;
 }
 
+// Print Display
 void Student::getDisplay() {
   cout << "\n";
   cout << firstName;
@@ -24,6 +27,7 @@ void Student::getDisplay() {
   cout << "\n";
 }
 
+// Getters
 int Student::getId() {
   return id;
 }

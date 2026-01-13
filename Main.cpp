@@ -7,6 +7,7 @@
 
 using namespace std;
 
+// Declare functions
 void add(Node*& current, Node* prev, Node*& data);
 void print(Node* current);
 void del(Node*& current, Node* prev, int id);
@@ -14,6 +15,7 @@ void avg(Node* current, float& sum, float& num);
 void quit(Node*& current);
 
 int main() {
+  // Create program variables
   bool run = true;
   Node* head = NULL;
 
@@ -27,6 +29,7 @@ int main() {
   
   while (run == true) {
 
+    // Get input
     cout << "\n";
     cout << "Enter Command: ";
     cin >> input;
@@ -37,7 +40,7 @@ int main() {
     int id = 0;
     float gpa = 0;
 
-    if (strcmp(input, ADD) == 0) {
+    if (strcmp(input, ADD) == 0) { // Add Student
       
       cout << "Enter first name: ";
       cin >> first;
@@ -56,10 +59,10 @@ int main() {
       Node* prev = NULL;
 
       add(head, prev, node);
-      
-    } else if (strcmp(input, PRINT) == 0) {
+
+    } else if (strcmp(input, PRINT) == 0) { // Print Students
       print(head);
-    } else if (strcmp(input, DEL) == 0) {
+    } else if (strcmp(input, DEL) == 0) { // Delete Student
       cout << "Enter id: ";
       cin >> id;
 
@@ -67,23 +70,24 @@ int main() {
       
       del(head, prev, id);
       
-    } else if (strcmp(input, AVG) == 0) {
+    } else if (strcmp(input, AVG) == 0) { // Average GPA
       float sum = 0;
       float n = 0;
       avg(head, sum, n);
-    } else if (strcmp(input, QUIT) == 0) {
+    } else if (strcmp(input, QUIT) == 0) { // Quit Program
       run = false;
       quit(head);
     }
   }  
 }
 
+// Recursively add a node in order of ID
 void add(Node*& current, Node* prev, Node*& data) {
 
   int currentId = 0;
   int id = 0;
   
-  if (current == NULL) {
+  if (current == NULL) { // Create head
     current = data; 
   } else {
     currentId = current->getStudent()->getId();
@@ -92,18 +96,19 @@ void add(Node*& current, Node* prev, Node*& data) {
     if ((id < currentId) && (prev == NULL)) { // Change head
       data->setNext(current);
       current = data;
-    } else if (id < currentId) { // insert
+    } else if (id < currentId) { // Insert
       prev->setNext(data);
       data->setNext(current);
-    } else if (current->getNext() == NULL) { // End insert
+    } else if (current->getNext() == NULL) { // End node insert
       current->setNext(data);
-    } else {
+    } else { // Recurse
       Node* next = current->getNext();
       add(next, current, data);
     }
   }
 }
 
+// Print each student data recursively
 void print(Node* current) {
   if (current != NULL) {
     current->getStudent()->getDisplay();
@@ -114,6 +119,7 @@ void print(Node* current) {
   }
 }
 
+// Delete student data recursively
 void del(Node*& current, Node* prev, int id) {
   if (current != NULL) {
     if (current->getStudent()->getId() == id) {
@@ -127,6 +133,7 @@ void del(Node*& current, Node* prev, int id) {
   }
 }
 
+// Average student gpa recursively
 void avg(Node* current, float& sum, float& n) {
   if (current != NULL) {
     sum += current->getStudent()->getGpa();
@@ -140,6 +147,7 @@ void avg(Node* current, float& sum, float& n) {
   }
 }
 
+// Delete all nodes recursively
 void quit(Node*& current) {
   if (current != NULL) {
     if (current->getNext() != NULL) {

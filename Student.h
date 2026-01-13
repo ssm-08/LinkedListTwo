@@ -16,6 +16,7 @@ class Student {
   // Print Student name & grade
   void getDisplay();
 
+  // Getters
   int getId();
   float getGpa();
   
