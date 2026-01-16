@@ -159,7 +159,7 @@ void quit(Node*& current) {
   if (current != NULL) {
     if (current->getNext() != NULL) {
       next = current->getNext();
-      quit(current);
+      quit(next);
     }
     
     delete next;
