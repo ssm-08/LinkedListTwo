@@ -10,6 +10,8 @@ Student::Student(char f[99], char l[99], int i, float g) {
 
 // Destructor
 Student::~Student() {
+  strcpy(firstName, "");
+  strcpy(lastName, "");
   id = 0;
   gpa = 0;
 }
